@@ -61,9 +61,8 @@ namespace TestWeek7.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Todo,Completed,UserId")] Todos todo)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
-                
                 await _crud.CreatePostAsync(todo);
                 return RedirectToAction(nameof(Index));
             }

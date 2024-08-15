@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TestWeek7.Data;
+using TestWeek7.Services;
 namespace TestWeek7
 {
     public class Program
@@ -12,10 +13,9 @@ namespace TestWeek7
                 options.UseSqlServer(builder.Configuration.GetConnectionString("TestWeek7Context") ?? throw new InvalidOperationException("Connection string 'TestWeek7Context' not found.")));
 
             // Add services to the container.
+            HttpClient client = new HttpClient();
+            builder.Services.AddSingleton(new CrudService(client));
             builder.Services.AddControllersWithViews();
-
-
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -35,7 +35,7 @@ namespace TestWeek7
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Todos}/{action=Index}/{id?}");
 
             app.Run();
         }

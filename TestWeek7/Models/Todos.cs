@@ -2,10 +2,15 @@
 {
     public class Todos
     {
-        public string Title { get; set; }
-        public double Price { get; set; }
-        public string Description { get; set; }
-        public string Category { get; set; }
+        public int Id { get; set; }
+        public string? Todo { get; set; }
+        public bool Completed { get; set; }
+        public int UserId { get; set; }
+        
     }
-    
+
+    public class ListTodo
+    {
+        public List<Todos> todos { get; set; }
+    }
 }
