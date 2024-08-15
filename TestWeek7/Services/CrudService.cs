@@ -18,7 +18,7 @@ namespace TestWeek7.Services
             var response = await _httpClient.GetAsync("https://dummyjson.com/todos");
             response.EnsureSuccessStatusCode();
             var todos = await response.Content.ReadFromJsonAsync<ListTodo>();
-            return todos.todos;
+            return todos.Todos;
         }
 
         public async Task<Todos> GetPostAsync(int id)
@@ -37,10 +37,11 @@ namespace TestWeek7.Services
             return createdTodo;
         }
 
-        public async Task UpdatePostAsync(int id, Todos updatedTodo)
+        public async Task UpdatePostAsync(int id, ListTodo updatedTodo)
         {
-            var response = await _httpClient.PutAsJsonAsync($"https://dummyjson.com/todo/{id}", updatedTodo);
+            var response = await _httpClient.PutAsJsonAsync($"https://dummyjson.com/todos/{id}", updatedTodo);
             response.EnsureSuccessStatusCode();
+            
         }
 
         public async Task DeletePostAsync(int id)

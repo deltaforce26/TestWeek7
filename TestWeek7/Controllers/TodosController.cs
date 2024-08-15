@@ -53,7 +53,7 @@ namespace TestWeek7.Controllers
 
             return View();
         }
-
+        //Make sure you are providing a valid UserId !!!!
         // POST: Todos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -93,17 +93,20 @@ namespace TestWeek7.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Todo,Completed,UserId")] Todos todos)
         {
+            
             if (id != todos.Id)
             {
                 return NotFound();
             }
-
+            
             if (ModelState.IsValid)
             {
+                ListTodo list = new ListTodo();
+                list.Todos.Add(todos);
+
                 try
                 {
-
-                    await _crud.UpdatePostAsync(id, todos);
+                    await _crud.UpdatePostAsync(id, list);
                 }
                 catch (DbUpdateConcurrencyException)
                 {

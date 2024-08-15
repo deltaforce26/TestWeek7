@@ -11,6 +11,6 @@
 
     public class ListTodo
     {
-        public List<Todos> todos { get; set; }
+        public List<Todos>? Todos { get; set; } = new List<Todos>();
     }
 }
