@@ -15,7 +15,7 @@ namespace TestWeek7.Services
         
         public async Task<List<Todos>> GetPostsAsync()
         {
-            var response = await _httpClient.GetAsync("https://dummyjson.com/todo");
+            var response = await _httpClient.GetAsync("https://fakestoreapi.com/products");
             response.EnsureSuccessStatusCode();
             var todos = await response.Content.ReadFromJsonAsync<List<Todos>>();
             return todos;
@@ -23,7 +23,7 @@ namespace TestWeek7.Services
 
         public async Task<Todos> GetPostAsync(int id)
         {
-            var response = await _httpClient.GetAsync($"https://dummyjson.com/todo/{id}");
+            var response = await _httpClient.GetAsync($"https://fakestoreapi.com/products/{id}");
             response.EnsureSuccessStatusCode();
             var todo = await response.Content.ReadFromJsonAsync<Todos>();
             return todo;
@@ -31,7 +31,7 @@ namespace TestWeek7.Services
 
         public async Task<Todos> CreatePostAsync(Todos newPost)
         {
-            var response = await _httpClient.PostAsJsonAsync("https://jsonplaceholder.typicode.com/posts", newPost);
+            var response = await _httpClient.PostAsJsonAsync("https://fakestoreapi.com/products", newPost);
             response.EnsureSuccessStatusCode();
             var createdTodo = await response.Content.ReadFromJsonAsync<Todos>();
             return createdTodo;
@@ -39,13 +39,13 @@ namespace TestWeek7.Services
 
         public async Task UpdatePostAsync(int id, Todos updatedTodo)
         {
-            var response = await _httpClient.PutAsJsonAsync($"https://dummyjson.com/todo/{id}", updatedTodo);
+            var response = await _httpClient.PutAsJsonAsync($"https://fakestoreapi.com/products/{id}", updatedTodo);
             response.EnsureSuccessStatusCode();
         }
 
         public async Task DeletePostAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync($"https://dummyjson.com/todo/{id}");
+            var response = await _httpClient.DeleteAsync($"https://fakestoreapi.com/products/{id}");
             response.EnsureSuccessStatusCode();
         }
     }
