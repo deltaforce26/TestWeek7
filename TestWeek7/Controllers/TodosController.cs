@@ -59,14 +59,15 @@ namespace TestWeek7.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Todo,Completed,UserId")] Todos todo)
+        public async Task<IActionResult> Create([Bind("Id,Todo,Completed,UserId")] Todos data)
         {
             if(ModelState.IsValid)
             {
-                await _crud.CreatePostAsync(todo);
+                await _crud.CreatePostAsync(data);
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(todo);
+            return View(data);
         }
 
         // GET: Todos/Edit/5
